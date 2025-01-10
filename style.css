@@ -1,10 +1,89 @@
+:root {
+    --bg-color: #ffffff;         
+    --text-color: #1f1f1f;      
+    --search-bg: #ececec;     
+    --footer-bg: #f2f2f2;     
+    --hover-bg: #f8f9fa;        
+    --link-color: #1a0dab;     
+    --footer-text: #5f5f5f;    
+}
+
+.dark-mode-input:checked ~ .page-wrapper {
+    background-color: #202124;   
+}
+
+.dark-mode-input:checked ~ .page-wrapper * {
+    --bg-color: #202124;
+    --text-color: #ffffff;
+    --search-bg: #303134;
+    --footer-bg: #171717;
+    --hover-bg: #303134;
+    --link-color: #8ab4f8;
+    --footer-text: #bdc1c6;
+}
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-size: 15px;
-    color: #1f1f1f;
+    color: var(--text-color);
 }
+
+body {
+    min-height: 100vh;
+}
+
+.page-wrapper {
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease;
+    position: relative;
+}
+
+.dark-mode-input {
+    display: none;  
+}
+
+.dark-mode-label {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 36px;
+    height: 36px;
+}
+
+.dark-mode-label:hover {
+    background-color: var(--search-bg);
+}
+
+.dark-mode-label .light-icon {
+    display: none;         
+}
+
+.dark-mode-label .dark-icon {
+    display: block;       
+}
+
+.dark-mode-label i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+    position: absolute;
+}
+
+.dark-mode-input:checked ~ .page-wrapper .dark-mode-label .light-icon {
+    display: block;
+    transform: rotate(360deg);
+}
+
+.dark-mode-input:checked ~ .page-wrapper .dark-mode-label .dark-icon {
+    display: none;
+}
+
 
 .main-header {
     display: flex;
@@ -35,7 +114,7 @@
 
 .header-right .fa-bars:hover {
     border-radius: 50%;
-    background-color: rgb(241, 241, 241);
+    background-color: var(--search-bg);
 }
 
 .header-right a:last-child {
@@ -74,20 +153,34 @@
     align-items: center;
     width: 585px;
     height: 50px;
-    border: 1px solid #ececec;
-    background-color: #ececec;
+    border: 1px solid #dfe1e5;
+    background-color: #fff;
     border-radius: 30px;
     padding: 0 20px;
 }
 
 .search-box:hover {
-    background-color: #d6d6d6;
+    background-color: #fff;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    border-color: rgba(223,225,229,0);
 }
 
-.search-box:focus-within {
-    background-color: white;
-    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+.dark-mode-input:checked ~ .page-wrapper .search-box {
+    background-color: #fff;
+    border: 1px solid #dfe1e5;
 }
+
+.dark-mode-input:checked ~ .page-wrapper .search-box:hover {
+    background-color: #fff;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    border-color: rgba(223,225,229,0);
+}
+
+.dark-mode-input:checked ~ .page-wrapper .search-box input,
+.dark-mode-input:checked ~ .page-wrapper .search-box i {
+    color: #1f1f1f;
+}
+
 
 .search-box input {
     border: none;
@@ -111,19 +204,20 @@
 }
 
 .button-container button {
-    background-color: #f8f9fa;
-    border: 1px solid #f8f9fa;
+    background-color: var(--hover-bg);
+    border: 1px solid var(--hover-bg);
     border-radius: 4px;
     padding: 0px 16px;
     height: 36px;
     cursor: pointer;
-    color: #5f5f5f;
+    color: var(--text-color);
 }
 
 .button-container button:hover {
     box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-    border: 1px solid #dadce0;
-    background-color: #f8f9fa;
+    border: 1px solid var(--search-bg);
+    background-color: var(--hover-bg);
+    filter: brightness(95%);
 }
 
 .language-options {
@@ -133,7 +227,7 @@
 
 .languages a {
     text-decoration: none;
-    color: #1a0dab;
+    color: var(--link-color);
     margin-right: 10px;
 }
 
@@ -144,21 +238,20 @@
 footer {
     position: absolute;
     bottom: 0;
-    background-color: #f2f2f2;
+    background-color: var(--footer-bg);
     width: 100%;
 }
 
 .footer-country {
     padding: 15px 30px;
-    border-bottom: 1px solid #dadce0;
-    color: #5f5f5f;
+    border-bottom: 1px solid var(--search-bg);
+    color: var(--footer-text);
 }
 
 .footer-links {
     display: flex;
     justify-content: space-between;
     padding: 15px 30px;
-    color: #5f5f5f;
 }
 
 .footer-left,
@@ -169,7 +262,7 @@ footer {
 
 footer a {
     text-decoration: none;
-    color: #5f5f5f;
+    color: var(--footer-text);
 }
 
 footer a:hover {
